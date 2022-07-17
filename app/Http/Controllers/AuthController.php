@@ -12,7 +12,6 @@ use App\Http\Requests\{
 
 class AuthController extends Controller
 {
-
     public function register(RegisterRequest $request)
     {
         $user = User::create([
@@ -23,7 +22,7 @@ class AuthController extends Controller
 
         $token = auth()->attempt($request->only('email', 'password'));
 
-        return fractal($token, new TokenTransformer)->respond(201);
+        return fractal($token, new TokenTransformer())->respond(201);
     }
 
     public function login(LoginRequest $request)
@@ -34,12 +33,10 @@ class AuthController extends Controller
             return abort(422);
         }
 
-        return fractal($token, new TokenTransformer)->respond();
+        return fractal($token, new TokenTransformer())->respond();
     }
 
     public function logout()
     {
-        
-        
     }
 }

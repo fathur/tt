@@ -24,13 +24,13 @@ class TripPolicy
     {
         return $user->id === $trip->user_id
             ? Response::allow()
-            : Response::denyAsNotFound();
+            : Response::denyWithStatus(403);
     }
 
     public function destroy(User $user, Trip $trip)
     {
         return $user->id === $trip->user_id
             ? Response::allow()
-            : Response::denyAsNotFound();
+            : Response::denyWithStatus(403);
     }
 }

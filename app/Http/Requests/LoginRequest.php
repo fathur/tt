@@ -38,14 +38,4 @@ class LoginRequest extends FormRequest
             'password.regex' => $passwordWeakMessage,
         ];
     }
-
-    public function failedValidation(Validator $validator)
-    {
-        $json = [
-            'status' => 'input_error',
-            'errors' => 'more data'
-        ];
-        $response = new JsonResponse( $json, 400 );
-        throw (new ValidationException($validator, $response))->status(400);
-    }
 }

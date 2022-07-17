@@ -13,7 +13,8 @@ class UpdateTripRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $trip = $this->route()->parameter('trip');
+        return $trip->user_id == $this->user()->id;
     }
 
     /**

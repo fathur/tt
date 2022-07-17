@@ -81,7 +81,5 @@ class Handler extends ExceptionHandler
                 ], $e->status);
             }
         });
-
-        
     }
 }

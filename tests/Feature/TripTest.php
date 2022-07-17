@@ -44,9 +44,9 @@ class TripTest extends TestCase
     public function test_view_trip_with_authorized_user()
     {
         $user = User::factory()->create();
-        $token = auth()->login($user);
+        $trip = Trip::factory()->for($user)->create();
 
-        $trip = Trip::factory()->create();
+        $token = auth()->login($user);
 
         $response = $this->withHeaders([
             'Authorization' => "Bearer {$token}",
@@ -60,7 +60,7 @@ class TripTest extends TestCase
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
-        $trip = Trip::factory()->create();
+        $trip = Trip::factory()->for($user1)->create();
 
         $token = auth()->login($user2);
 
@@ -69,16 +69,13 @@ class TripTest extends TestCase
             'Authorization' => "Bearer {$token}",
         ])->get("/api/trips/{$trip->id}");
  
-        $response->assertStatus(401);
+        $response->assertStatus(403);
     }
 
     public function test_view_trip_with_unauthenticated_user()
     {
         $user = User::factory()->create();
-        $trip = Trip::factory()->create();
-
-        $token = auth()->login($user);
-
+        $trip = Trip::factory()->for($user)->create();
 
         $response = $this->get("/api/trips/{$trip->id}");
  
@@ -87,31 +84,100 @@ class TripTest extends TestCase
 
     public function test_update_trip_with_authenticated_user()
     {
-        # code...
+        $user = User::factory()->create();
+        $trip = Trip::factory()->for($user)->create();
+
+        $token = auth()->login($user);
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->put("/api/trips/{$trip->id}", [
+            'title' => 'Updated title',
+            'origin' => 'Updated origin',
+            'destination' => 'Updated destination',
+            'description' => 'Updated description',
+        ]);
+ 
+        $response->assertStatus(200)
+            ->assertJsonPath('data.title', 'Updated title')
+            ->assertJsonPath('data.origin', 'Updated origin')
+            ->assertJsonPath('data.destination', 'Updated destination')
+            ->assertJsonPath('data.description', 'Updated description');
     }
 
     public function test_update_trip_with_unauthorized_user()
     {
-        # code...
+        $user1 = User::factory()->create();
+        $user2 = User::factory()->create();
+        $trip = Trip::factory()->for($user1)->create();
+
+        $token = auth()->login($user2);
+
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->put("/api/trips/{$trip->id}", [
+            'title' => 'Updated title',
+            'origin' => 'Updated origin',
+            'destination' => 'Updated destination',
+            'description' => 'Updated description',
+        ]);
+ 
+        $response->assertStatus(403);
     }
 
     public function test_update_trip_with_unauthenticated_user()
     {
-        # code...
+        $user = User::factory()->create();
+        $trip = Trip::factory()->for($user)->create();
+
+        $response = $this->put("/api/trips/{$trip->id}", [
+            'title' => 'Updated title',
+            'origin' => 'Updated origin',
+            'destination' => 'Updated destination',
+            'description' => 'Updated description',
+        ]);
+ 
+        $response->assertStatus(401);
     }
 
     public function test_delete_trip_with_authenticated_user()
     {
-        # code...
+        $user = User::factory()->create();
+        $trip = Trip::factory()->for($user)->create();
+
+        $token = auth()->login($user);
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->delete("/api/trips/{$trip->id}");
+
+        $response->assertStatus(204);
+
     }
 
     public function test_delete_trip_with_unauthorized_user()
     {
-        # code...
+        $user1 = User::factory()->create();
+        $user2 = User::factory()->create();
+        $trip = Trip::factory()->for($user1)->create();
+
+        $token = auth()->login($user2);
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->delete("/api/trips/{$trip->id}");
+
+        $response->assertStatus(403);
     }
 
     public function test_delete_trip_with_unauthenticated_user()
     {
-        # code...
+        $user = User::factory()->create();
+        $trip = Trip::factory()->for($user)->create();
+
+        $response = $this->delete("/api/trips/{$trip->id}");
+
+        $response->assertStatus(401);
     }
 }

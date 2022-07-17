@@ -18,7 +18,7 @@ class AuthenticateWithJWT
     {
         $token = auth()->user();
 
-        if(!$token) {
+        if (!$token) {
             return response()->json([
                 'data' => [
                     'errors' => ['Authorization failed.']
