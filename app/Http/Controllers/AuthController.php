@@ -38,5 +38,7 @@ class AuthController extends Controller
 
     public function logout()
     {
+        auth()->logout(true);
+        return response()->noContent();
     }
 }

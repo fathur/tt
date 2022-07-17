@@ -6,6 +6,8 @@ use App\Http\Requests\StoreTripRequest;
 use App\Http\Requests\UpdateTripRequest;
 use App\Models\Trip;
 use App\Transformers\TripTransformer;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use Illuminate\Support\Facades\Cache;
 
 class TripController extends Controller
 {
@@ -16,12 +18,13 @@ class TripController extends Controller
      */
     public function index()
     {
-        // $this->authorize('index', Trip::class);
-
         $user = auth()->user();
-        $trips = $user->trips()->get();
+        $tripPaginator = $user->trips()->paginate(10);
+        $trips = $tripPaginator->getCollection();
 
-        return fractal($trips, new TripTransformer())->respond();
+        return fractal($trips, new TripTransformer())
+            ->paginateWith(new IlluminatePaginatorAdapter($tripPaginator))
+            ->respond();
     }
 
     /**
@@ -48,8 +51,12 @@ class TripController extends Controller
      * @param  \App\Models\Trip  $trip
      * @return \Illuminate\Http\Response
      */
-    public function show(Trip $trip)
+    public function show(int $tripId)
     {
+        $trip = Cache::rememberForever("trip@{$tripId}", function () use ($tripId) {
+            return Trip::find($tripId);
+        });
+
         $this->authorize('show', $trip);
 
         return fractal($trip, new TripTransformer())->respond();
