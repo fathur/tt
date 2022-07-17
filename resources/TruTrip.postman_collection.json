@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "6e58c249-439b-4614-885d-001c68d1517b",
+		"name": "TruTrip",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Fathur",
+							"type": "default"
+						},
+						{
+							"key": "email",
+							"value": "fathur+11@rohman.me",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "abcABC123@#$",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "333",
+							"type": "default",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://108.136.42.143/api/register",
+					"protocol": "http",
+					"host": [
+						"108",
+						"136",
+						"42",
+						"143"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "fathur+11@rohman.me",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "abcABC123@#$",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://108.136.42.143/api/login",
+					"protocol": "http",
+					"host": [
+						"108",
+						"136",
+						"42",
+						"143"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create trip",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTA4LjEzNi40Mi4xNDMvYXBpL3JlZ2lzdGVyIiwiaWF0IjoxNjU4MDc2NjgyLCJleHAiOjE2NTgwODAyODIsIm5iZiI6MTY1ODA3NjY4MiwianRpIjoiV3NSalpDWnpLd25DcGFTdyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.1Ev45cBdMIU4SW-2klJHcF8ptipwmjZSS6ijJb2Y5bw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Di buat",
+							"type": "default"
+						},
+						{
+							"key": "origin",
+							"value": "a",
+							"type": "default"
+						},
+						{
+							"key": "destination",
+							"value": "a",
+							"type": "default"
+						},
+						{
+							"key": "description",
+							"value": "ofdgfdg dfg dfg df df gfd gf",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://108.136.42.143/api/trips",
+					"protocol": "http",
+					"host": [
+						"108",
+						"136",
+						"42",
+						"143"
+					],
+					"path": [
+						"api",
+						"trips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List trip",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTA4LjEzNi40Mi4xNDMvYXBpL3JlZ2lzdGVyIiwiaWF0IjoxNjU4MDc2NjgyLCJleHAiOjE2NTgwODAyODIsIm5iZiI6MTY1ODA3NjY4MiwianRpIjoiV3NSalpDWnpLd25DcGFTdyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.1Ev45cBdMIU4SW-2klJHcF8ptipwmjZSS6ijJb2Y5bw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://108.136.42.143/api/trips",
+					"protocol": "http",
+					"host": [
+						"108",
+						"136",
+						"42",
+						"143"
+					],
+					"path": [
+						"api",
+						"trips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detail trip",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTA4LjEzNi40Mi4xNDMvYXBpL3JlZ2lzdGVyIiwiaWF0IjoxNjU4MDc2NjgyLCJleHAiOjE2NTgwODAyODIsIm5iZiI6MTY1ODA3NjY4MiwianRpIjoiV3NSalpDWnpLd25DcGFTdyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.1Ev45cBdMIU4SW-2klJHcF8ptipwmjZSS6ijJb2Y5bw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://108.136.42.143/api/trips/:trip_id",
+					"protocol": "http",
+					"host": [
+						"108",
+						"136",
+						"42",
+						"143"
+					],
+					"path": [
+						"api",
+						"trips",
+						":trip_id"
+					],
+					"variable": [
+						{
+							"key": "trip_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update trip",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTA4LjEzNi40Mi4xNDMvYXBpL3JlZ2lzdGVyIiwiaWF0IjoxNjU4MDc2NjgyLCJleHAiOjE2NTgwODAyODIsIm5iZiI6MTY1ODA3NjY4MiwianRpIjoiV3NSalpDWnpLd25DcGFTdyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.1Ev45cBdMIU4SW-2klJHcF8ptipwmjZSS6ijJb2Y5bw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Di update",
+							"type": "default"
+						},
+						{
+							"key": "origin",
+							"value": "acc",
+							"type": "default"
+						},
+						{
+							"key": "destination",
+							"value": "add",
+							"type": "default"
+						},
+						{
+							"key": "description",
+							"value": "ofdgfdg dfg dfg df df gfd gf",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://108.136.42.143/api/trips/:trip_id",
+					"protocol": "http",
+					"host": [
+						"108",
+						"136",
+						"42",
+						"143"
+					],
+					"path": [
+						"api",
+						"trips",
+						":trip_id"
+					],
+					"variable": [
+						{
+							"key": "trip_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete trip",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTA4LjEzNi40Mi4xNDMvYXBpL3JlZ2lzdGVyIiwiaWF0IjoxNjU4MDc2NjgyLCJleHAiOjE2NTgwODAyODIsIm5iZiI6MTY1ODA3NjY4MiwianRpIjoiV3NSalpDWnpLd25DcGFTdyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.1Ev45cBdMIU4SW-2klJHcF8ptipwmjZSS6ijJb2Y5bw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://108.136.42.143/api/trips/:trip_id",
+					"protocol": "http",
+					"host": [
+						"108",
+						"136",
+						"42",
+						"143"
+					],
+					"path": [
+						"api",
+						"trips",
+						":trip_id"
+					],
+					"variable": [
+						{
+							"key": "trip_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
